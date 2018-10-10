@@ -28,17 +28,17 @@ namespace lab5.Controllers
 
             List<DateTime> Updated_users_list = new List<DateTime>();
             DateTime datetime_now = DateTime.Now;
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 DateTime updated_time = datetime_now.AddDays(-i);
                 Updated_users_list.Add(updated_time);
             }
-            foreach(var up in users)
+            foreach (var up in users)
             {
                 var UpDated = Convert.ToDateTime(up.UpdateOn);
-                for(int i = 0; i < 7; i++)
+                for (int i = 0; i < 7; i++)
                 {
-                    if(UpDated.Day == Updated_users_list[i].Day && UpDated.Month == Updated_users_list[i].Month)
+                    if (UpDated.Day == Updated_users_list[i].Day && UpDated.Month == Updated_users_list[i].Month)
                     {
                         updated_users++;
                     }
@@ -46,17 +46,17 @@ namespace lab5.Controllers
             }
             List<DateTime> Birthday_users_list = new List<DateTime>();
             DateTime date_now = DateTime.Now;
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 DateTime bdate_next = date_now.AddDays(i);
                 Birthday_users_list.Add(bdate_next);
             }
-            foreach(var bd in users)
+            foreach (var bd in users)
             {
                 var Bdate = Convert.ToDateTime(bd.DateOfBirth);
-                for(int i = 0; i < 7; i++)
+                for (int i = 0; i < 7; i++)
                 {
-                    if(Bdate.Day == Birthday_users_list[i].Day && Bdate.Month == Birthday_users_list[i].Month)
+                    if (Bdate.Day == Birthday_users_list[i].Day && Bdate.Month == Birthday_users_list[i].Month)
                     {
                         users_with_birthday++;
                     }
@@ -67,7 +67,7 @@ namespace lab5.Controllers
             ViewBag.Updated_Persons_Data = updated_users;
 
 
-            return View(Updated_users_list);
+            return View();
         }
 
         // GET: Dashboard/Details/5

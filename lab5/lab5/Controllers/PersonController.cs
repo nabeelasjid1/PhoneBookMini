@@ -61,6 +61,7 @@ namespace lab5.Controllers
                 person.EmailId = collection.Person.EmailId;
                 person.AddedOn = DateTime.Now;
                 person.HomeCity = collection.Person.HomeCity;
+                person.UpdateOn = DateTime.Today;
                 person.HomeAddress = collection.Person.HomeAddress;
                 person.TwitterId = collection.Person.TwitterId;
                 person.AddedBy = user;

@@ -1,11 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 <h2>Deshboard</h2>
 @*
-   This will show the number of total person added 
+    This will show the number of total person added
 *@
 <div class="row">
     <div class="col-md-3">
@@ -14,10 +13,11 @@
             <span class="count-numbers">@ViewBag.Total_no_Persons</span>
             <span class="count-name">Person</span>
         </div>
+
     </div>
-@*
-    This will show the number of person With Up comming Birthdays
-*@
+    @*
+        This will show the number of person With Up comming Birthdays
+    *@
     <div class="col-md-3">
         <div class="card-counter danger">
             <i class="fa fa-ticket"></i>
@@ -25,9 +25,9 @@
             <span class="count-name">Birthday's</span>
         </div>
     </div>
-@*
-    This will show the number of person With Up comming Birthdays
-*@
+    @*
+        This will show the number of person With Up comming Birthdays
+    *@
     <div class="col-md-3">
         <div class="card-counter success">
             <i class="fa fa-database"></i>
@@ -36,4 +36,3 @@
         </div>
     </div>
 </div>
-
