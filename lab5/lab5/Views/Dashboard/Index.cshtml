@@ -1,38 +1,41 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home Page";
 }
+<div class="jumbotron">
+    <h1 Style=" text-align:center">Mini PhoneBook</h1>
+</div>
 
-<h2>Deshboard</h2>
-@*
-    This will show the number of total person added
-*@
 <div class="row">
-    <div class="col-md-3">
-        <div class="card-counter primary">
-            <i class="fa fa-code-fork"></i>
-            <span class="count-numbers">@ViewBag.Total_no_Persons</span>
-            <span class="count-name">Person</span>
-        </div>
-
+    <div class="col-md-4">
+        <h1>Contacts</h1>
+        <p>
+            Total Count = @ViewBag.PersonCount
+        </p>
     </div>
-    @*
-        This will show the number of person With Up comming Birthdays
-    *@
-    <div class="col-md-3">
-        <div class="card-counter danger">
-            <i class="fa fa-ticket"></i>
-            <span class="count-numbers">@ViewBag.Persons_upcomming_BD</span>
-            <span class="count-name">Birthday's</span>
-        </div>
+    <div class="col-md-4">
+        <h2>Birthdays (in 10 days)</h2>
+        <ul>
+            @foreach (var item in @ViewBag.Birthdays)
+            {
+                <li>
+                    @item.FirstName
+                    @item.MiddleName
+                    @item.LastName
+                </li>
+            }
+        </ul>
     </div>
-    @*
-        This will show the number of person With Up comming Birthdays
-    *@
-    <div class="col-md-3">
-        <div class="card-counter success">
-            <i class="fa fa-database"></i>
-            <span class="count-numbers">@ViewBag.Updated_Persons_Data</span>
-            <span class="count-name">Records Updates</span>
-        </div>
+    <div class="col-md-4">
+        <h2>Updated (Last 7 days)</h2>
+        <ul>
+            @foreach (var item in @ViewBag.Updated)
+            {
+                <li>
+                    @item.FirstName
+                    @item.MiddleName
+                    @item.LastName
+                </li>
+            }
+        </ul>
     </div>
 </div>

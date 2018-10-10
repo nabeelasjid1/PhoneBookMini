@@ -20,53 +20,27 @@ namespace lab5.Controllers
         public ActionResult Index()
         {
             string user = User.Identity.GetUserId();
-            var users = _phoneBookDb.People.Where(p => p.AddedBy == user).ToList();
-            int no_of_persons = users.Count();
-            int users_with_birthday = 0;
-            int updated_users = 0;
-            /////Persons Whose Data is updated in Last 7 days
-
-            List<DateTime> Updated_users_list = new List<DateTime>();
-            DateTime datetime_now = DateTime.Now;
-            for (int i = 0; i < 7; i++)
+            var people = from r in _phoneBookDb.People where r.AspNetUser.Id == user select r;
+            List<Person> birthdays = new List<Person>();
+            List<Person> updated = new List<Person>();
+            foreach (Person person in people.ToList())
             {
-                DateTime updated_time = datetime_now.AddDays(-i);
-                Updated_users_list.Add(updated_time);
-            }
-            foreach (var up in users)
-            {
-                var UpDated = Convert.ToDateTime(up.UpdateOn);
-                for (int i = 0; i < 7; i++)
+                if ((person.DateOfBirth.Value.DayOfYear - DateTime.Today.DayOfYear <= 10) && (person.DateOfBirth.Value.DayOfYear - DateTime.Today.DayOfYear >= 0))
                 {
-                    if (UpDated.Day == Updated_users_list[i].Day && UpDated.Month == Updated_users_list[i].Month)
-                    {
-                        updated_users++;
-                    }
+                    birthdays.Add(person);
                 }
             }
-            List<DateTime> Birthday_users_list = new List<DateTime>();
-            DateTime date_now = DateTime.Now;
-            for (int i = 0; i < 10; i++)
+            foreach (Person person in people.ToList())
             {
-                DateTime bdate_next = date_now.AddDays(i);
-                Birthday_users_list.Add(bdate_next);
-            }
-            foreach (var bd in users)
-            {
-                var Bdate = Convert.ToDateTime(bd.DateOfBirth);
-                for (int i = 0; i < 7; i++)
-                {
-                    if (Bdate.Day == Birthday_users_list[i].Day && Bdate.Month == Birthday_users_list[i].Month)
+                    if ((DateTime.Today.DayOfYear - person.AddedOn.DayOfYear) <= 7)
                     {
-                        users_with_birthday++;
+                        updated.Add(person);
                     }
-                }
+                
             }
-            ViewBag.Total_no_Persons = no_of_persons;
-            ViewBag.Persons_upcomming_BD = users_with_birthday;
-            ViewBag.Updated_Persons_Data = updated_users;
-
-
+            ViewBag.PersonCount = people.ToList().Count.ToString();
+            ViewBag.Birthdays = birthdays;
+            @ViewBag.Updated = updated;
             return View();
         }
 
